@@ -1,15 +1,11 @@
-language: generic
-
 sudo: required
+language: generic
 services:
   - docker
-
 before_install:
   - docker build -t chang6chang/docker-react -f Dockerfile.dev . 
-
 script:
   - docker run -e CI=true chang6chang/docker-react npm run test
-
 deploy:
   provider: elasticbeanstalk
   region: "eu-west-3"
@@ -19,6 +15,5 @@ deploy:
   bucket_path: "docker"
   on:
     branch: master
-
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
